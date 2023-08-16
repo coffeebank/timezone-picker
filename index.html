@@ -3,15 +3,12 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>This timezone-picker is a responsive jquey plugin which creates a Map using SVG. A user can select a country from worldmap and it returns timezone value of selected country.</title>
+    <title>🕗 Timezone Picker</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="This timezone-picker is a responsive jquey plugin which creates a Map using SVG. A user can select a country from worldmap and it returns timezone value of selected country.">
-    <meta name="keywords" content="jquery world map,world map generator,world map jquery,jquery map,timezone map,timezone,timezone selection,map, jquery map,create map,WORLD MAP,auto map creator,map generator,create map online">
-    <meta name="author" content="Keval Bhatt">
+    <meta name="description" content="See the world's timezones, and where yours is!">
     <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script type="text/javascript" src="js/timezone-picker.min.js"></script>
     <style type="text/css">
@@ -21,55 +18,43 @@
         font-size: small !important;
     }
     </style>
-    <script>
-    (function(i, s, o, g, r, a, m) {
-        i['GoogleAnalyticsObject'] = r;
-        i[r] = i[r] || function() {
-            (i[r].q = i[r].q || []).push(arguments)
-        }, i[r].l = 1 * new Date();
-        a = s.createElement(o),
-            m = s.getElementsByTagName(o)[0];
-        a.async = 1;
-        a.src = g;
-        m.parentNode.insertBefore(a, m)
-    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
-
-    ga('create', 'UA-70749255-1', 'auto');
-    ga('send', 'pageview');
-    </script>
+    <script src="https://coffeebank.netlify.app/home/assets/catsjs/index.js"></script>
 </head>
 
 <body>
-    <section class="page-header">
-        <h1 class="project-name">Timezone Picker </h1>
-        <h2 class="project-tagline">Select timezone using world map</h2>
-        <a href="https://github.com/kevalbhatt/timezone-picker" class="btn">View on GitHub</a>
-        <a href="https://github.com/kevalbhatt/timezone-picker/zipball/master" class="btn">Download .zip</a>
-        <a href="https://github.com/kevalbhatt/timezone-picker/tarball/master" class="btn">Download .tar.gz</a>
+    <section style="padding:12px 24px;max-width:1600px;margin:0 auto;">
+      <h1>
+      <a id="world-map-generator" class="anchor" href="#world-map-generator" aria-hidden="true"><span class="octicon octicon-link"></span></a>🕗 Timezone Picker</h1>
+      <div style="padding:6px 0px;">
+        <p style="font-size:1.1rem;">Detected timezone:<br /><span id="timezone" style="font-weight:bold;">None</span></p>
+      </div>
     </section>
-    <section class="main-content">
-        <h1>
-<a id="world-map-generator" class="anchor" href="#world-map-generator" aria-hidden="true"><span class="octicon octicon-link"></span></a>Timezone Picker</h1>
-        <h1>
-<a id="description" class="anchor" href="#description" aria-hidden="true"><span class="octicon octicon-link"></span></a>Description</h1>
-        <p>This timezone-picker is a responsive jquey plugin which creates a Map using SVG. A user can select a country from worldmap and it returns timezone value of selected country.</p>
-
-        <h1>
-<a id="example" class="anchor" href="#example" aria-hidden="true"><span class="octicon octicon-link"></span></a>Example</h1>
-<div style="height:600px;" id="map"></div>
+    <section style="padding:12px 24px;max-width:1600px;margin:0 auto;aspect-ratio: 500/300;">
+        <div style="width:100%;height:auto;" id="map"></div>
         <script type="text/javascript">
+        try {
+          timezone = Intl.DateTimeFormat().resolvedOptions().timeZone
+        } catch {
+          timezone = "GMT"
+          console.log("Couldn't fetch timezone automatically....")
+        }
+        console.log("timezone:", timezone)
+        timezone_elem = document.getElementById("timezone")
+        timezone_elem.innerHTML = timezone
         $('#map').timezonePicker({
+            defaultValue: {
+              value: timezone,
+              attribute: "timezone"
+            },
             quickLink: [{
-                "PST": "PST",
-                "MST": "MST",
-                "CST": "CST",
-                "EST": "EST",
-                "GMT": "GMT",
-                "LONDON": "Europe/London",
-                "IST": "IST"
+                "MY TIMEZONE": timezone
             }]
         });
         </script>
+    </section>
+    <section style="padding:12px 24px;max-width:1600px;margin:0 auto;">
+      <p style="font-size:0.75rem;">Source: <a href="https://github.com/kevalbhatt/timezone-picker" target="_blank" rel="noopener">kevalbhatt/timezone-picker</a> (MIT License)</p>
+    </section>
 </body>
 
 </html>
